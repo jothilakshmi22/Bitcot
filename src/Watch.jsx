@@ -27,13 +27,14 @@ const Watch = () => {
   useEffect(() => {
     const handleWheel = (e) => {
       e.preventDefault();
-      
+
       setCurrentStep((prev) => {
         // Handle scrolling up (negative deltaY) and down (positive deltaY)
-        const next = e.deltaY > 0 
-          ? Math.min(prev + 1, 23)  // Forward scroll
-          : Math.max(prev - 1, -1); // Backward scroll
-        
+        const next =
+          e.deltaY > 0
+            ? Math.min(prev + 1, 23) // Forward scroll
+            : Math.max(prev - 1, -1); // Backward scroll
+
         // new active index
         const newIndex = next < 0 ? -1 : Math.floor(next / 6);
         if (newIndex !== Math.floor(prev / 6)) {
@@ -47,12 +48,10 @@ const Watch = () => {
     return () => window.removeEventListener("wheel", handleWheel);
   }, []);
 
-
   const getProgress = () => {
     if (currentStep < 0) return 0;
     return (currentStep % 6) / 6;
   };
-
 
   const isVisible = (index) => index === activeIndex;
 
